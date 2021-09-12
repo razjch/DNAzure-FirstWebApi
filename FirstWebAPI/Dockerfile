@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["FirstWebAPI/FirstWebAPI.csproj", "FirstWebAPI/"]
-RUN dotnet restore "FirstWebAPI/FirstWebAPI.csproj"
-COPY . .
-WORKDIR "/src/FirstWebAPI"
+COPY *.csproj ./
+RUN dotnet restore 
+COPY . ./
+WORKDIR "/src"
 RUN dotnet build "FirstWebAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
